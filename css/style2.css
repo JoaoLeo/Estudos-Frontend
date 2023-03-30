@@ -1,0 +1,62 @@
+body{
+    background-color: rgb(190, 252, 252);
+}
+h1{
+    text-align: center;
+    color: pink;
+    font-size: 50px;
+}
+h2{
+    text-align: center;
+    background-color: purple;
+    color: white;
+    width: auto;
+    height: 30px;
+}
+h3{
+    padding-left: 60px;
+    color: purple
+}
+ul, li{
+    border-bottom: 1px red solid;
+}
+li{
+    height: auto;
+    padding-top: 13px;
+    padding-bottom: auto;
+    padding-left: 10px;
+}
+a{
+    text-decoration: none;
+}
+ul{
+    border-left: 10px purple solid;
+    border-bottom:1px red solid;
+    list-style-type: none;
+    padding-left: 5px;
+}
+#menu{
+    background-color: aqua;
+    width: 300px;
+    height: auto;
+}
+.bodyPage{
+    display: grid;
+}
+.menuPaginas{
+    grid-column-start: 1;
+    grid-row-start: 3;
+    grid-row-end: 5;
+}
+.itens{
+    text-align: justify;
+    padding-left: 3px;
+    grid-column-start: 5;
+    grid-row-start: 3;
+}
+.paragrafo{
+    padding-left: 15px;
+}
+.fundoParagrafo{
+    background-color: white;
+}

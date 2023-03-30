@@ -1,0 +1,33 @@
+body{
+    background-color:rgb(41, 40, 40) ;
+}
+h1{
+    color:rgb(219, 169, 31); ;
+    text-align: center;
+    padding: 20px;
+    border: 5px solid;
+    border-radius: 20%;
+}
+h2{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-align: center;
+    color: rgb(41, 40, 40);
+    border-radius: 5%;
+}
+a{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+p{
+    color: rgb(219, 169, 31);
+}
+ul{
+    text-align: center;
+}
+li{
+    display: inline;		
+    background-color: rgb(219, 169, 31) ;	
+    padding: 10px;
+    text-decoration: none;
+    border-left:5px dotted;
+    border-bottom:5px dotted;
+}

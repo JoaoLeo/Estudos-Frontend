@@ -1,8 +1,5 @@
 import React from 'react'
 
-const style = {
-  backgroundColor: "red"
-}
 const p = {
   color: "purple",
   textAlign: "center"

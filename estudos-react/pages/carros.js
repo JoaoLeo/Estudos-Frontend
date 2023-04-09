@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Button, Card, Col, Container, Row } from 'react-bootstrap'
 import Pagina from '../components/Pagina'
 
@@ -16,7 +16,6 @@ const carros = () => {
      <Pagina titulo="Carros">
                 <Container> 
                 <Row md={4}>
-
                     {carros.map(carro => (
                         <Col>
                             <Card style={{ width: '290px', height: '250px' }} className='mb-5'>

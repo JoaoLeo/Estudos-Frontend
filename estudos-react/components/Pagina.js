@@ -4,7 +4,6 @@ import { Rodape } from './Rodape'
 import { Container } from 'react-bootstrap'
 
 const Pagina = (props) => {
-  console.log(props)
   return (
     <>
       <Cabecalho />

@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react'
-import Cabecalho from './Cabecalho'
-import { Rodape } from './Rodape'
+import Cabecalho from '@/components/Cabecalho'
+import { Rodape } from '@/components/Rodape'
 import { Container } from 'react-bootstrap'
 
 const Pagina = (props) => {

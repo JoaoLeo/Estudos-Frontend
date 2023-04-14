@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Pagina from '../components/Pagina';
+import Pagina from '@/components/Pagina';
 
 export default function Home() {
   return (

@@ -1,16 +1,42 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Pagina from '@/components/Pagina'
-import apiFilmes from '@/services/apiFilmes' 
+import apiFilmes from '@/services/apiFilmes'
+import { Button, Card, Col, Row } from 'react-bootstrap'
+import Link from 'next/link'
 
 const index = (props) => {
 
     return (
         <>
             <Pagina titulo="Filmes">
-                { props.filmes.map(filme => (
-                    <p>{filme.title}</p>
-                ))}
+
+                <Row md={4}>
+                    {props.filmes.map(filme => (
+                        <Col>
+                            <Card>
+                                <Card.Img variant="top" src={"https://image.tmdb.org/t/p/w500" + filme.backdrop_path} />
+                                <Card.Body>
+                                    <Card.Title>{filme.title}</Card.Title>
+                                    <p>
+                                        Lançamento: {filme.release_date}
+                                    </p>
+                                    <p>
+                                        Nota: {filme.vote_average}
+                                    </p>
+                                    <p>
+                                        {filme.overview}
+                                    </p>
+                                    <p>
+                                        <Link className='btn btn-warning' href={"/filmes/" + filme.id}> Detalhes</Link>
+                                    </p>
+                                
+                                </Card.Body>
+                            </Card>
+                        </Col>
+
+                    ))}
+                </Row>
             </Pagina>
 
         </>
@@ -23,8 +49,8 @@ export async function getServerSideProps(context) {
     const resultado = await apiFilmes.get("/movie/popular")
     const filmes = resultado.data.results
     return {
-      props: {
-        filmes
-      }, // will be passed to the page component as props
+        props: {
+            filmes
+        }, // will be passed to the page component as props
     }
-  }
+}

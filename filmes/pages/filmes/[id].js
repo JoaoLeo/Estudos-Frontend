@@ -78,7 +78,7 @@ export default Detalhes;
 
 export async function getServerSideProps(context) {
     const id = context.params.id
-    const resultado = await apiFilmes.get("/movie/" + id)
+    const resultado = await apiFilmes.get("/movie/" + id + "?language=pt-BR")
     const filme = resultado.data
     const getAtores = await apiFilmes.get("/movie/" + id + "/credits")
     const atores = getAtores.data

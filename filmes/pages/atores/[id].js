@@ -7,6 +7,8 @@ import { Card, Col, Row } from 'react-bootstrap'
 const DetalhesAtores = (props) => {
     const ator = props.infoAtor
     const filmes = props.filmes.cast
+    const imagens = props.imagens.profiles
+    const series = props.series.cast
   return (
     <>
     <Pagina>
@@ -20,12 +22,30 @@ const DetalhesAtores = (props) => {
         </Col>
     </Row>
     <Row>
-                        <h1> Filmes: </h1>
+        <h1> Imagens: </h1>
+            {imagens.map(i => (
+                <Col md={2}>
+                    <Card.Img variant="top" src={"https://image.tmdb.org/t/p/w500" + i.file_path}  />
+                </Col>
+            ))}
+    </Row>
+    <Row>
+                        <h1> Filmes em que atuou: </h1>
                         {filmes.map(f => (
                             <Col md={2}>
                             <Link href={"/filmes/" + f.id}>
                             <Card.Img variant="top" src={"https://image.tmdb.org/t/p/w500" + f.poster_path} title={f.name} />
                             </Link>
+                            </Col>
+                        ))}
+                   
+                </Row>
+
+                <Row>
+                        <h1> Series de TV em que atuou: </h1>
+                        {series.map(s => (
+                            <Col md={2}>
+                            <Card.Img variant="top" src={"https://image.tmdb.org/t/p/w500" + s.poster_path} />
                             </Col>
                         ))}
                    
@@ -39,13 +59,17 @@ export default DetalhesAtores
 
 export async function getServerSideProps(context) {
     const id = context.params.id
-    const resAtor = await apiFilmes.get("/person/" + id)
-    const resFilmes = await apiFilmes.get("/person/"+ id + "/tv_credits")
+    const resAtor = await apiFilmes.get("/person/" + id + '?language=pt-BR')
+    const resFilmes = await apiFilmes.get("/person/"+ id + "/movie_credits")
+    const resImagens = await apiFilmes.get("/person/"+ id+ "/images")
+    const resSeries = await apiFilmes.get("/person/"+ id + "/tv_credits")
     const infoAtor = resAtor.data
     const filmes = resFilmes.data
+    const imagens = resImagens.data
+    const series = resSeries.data
     return {
         props: {
-            infoAtor, filmes
-        }, // will be passed to the page component as props
+            infoAtor, filmes, imagens, series
+        }, 
     }
 }

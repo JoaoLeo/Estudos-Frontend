@@ -17,7 +17,8 @@ const DetalhesAtores = (props) => {
         <Card.Img variant="top" src={"https://image.tmdb.org/t/p/w500" + ator.profile_path} />
         </Col>
         <Col md={9}>
-            <p> <strong >Data de nascimento: </strong> {ator.birthday != null ? ator.birthday : "Não informado na api"}</p>
+            <p> <strong> Data de nascimento: </strong> {ator.birthday != null ? ator.birthday : "Não informado na api"}</p>
+            <p> <strong> Local de nascimento: </strong> {ator.place_of_birth != null ? ator.place_of_birth : "Não informado na api" }</p>
             <p> <strong> Biografia: </strong> {ator.biography != "" ? ator.biography : "Não informado na api"}</p>
         </Col>
     </Row>

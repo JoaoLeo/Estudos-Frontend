@@ -8,7 +8,7 @@ export const Rodape = () => {
   return (
     <div style={{width: "100%"}} className='bg-secondary text-white text-center position-fixed bottom-0'>
     <p style={p}>
-      Rodape
+      <a href="https://github.com/JoaoLeo/" target={'_blank'}> João Leonardo </a>
     </p>
     </div>
   )

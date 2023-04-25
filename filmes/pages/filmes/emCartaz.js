@@ -1,15 +1,13 @@
-import 'bootstrap/dist/css/bootstrap.min.css'
-import React from 'react'
 import Pagina from '@/components/Pagina'
+import React from 'react'
 import apiFilmes from '@/services/apiFilmes'
-import { Button, Card, Col, Row } from 'react-bootstrap'
+import { Card, Col, Row } from 'react-bootstrap'
 import Link from 'next/link'
 
-const index = (props) => {
-
+const emCartaz = (props) => {
     return (
         <>
-            <Pagina titulo="Popular">
+            <Pagina titulo="Em cartaz">
 
                 <Row md={4}>
                     {props.filmes.map(filme => (
@@ -43,10 +41,10 @@ const index = (props) => {
     )
 }
 
-export default index
+export default emCartaz
 
 export async function getServerSideProps(context) {
-    const resultado = await apiFilmes.get("/movie/popular?language=pt-BR'")
+    const resultado = await apiFilmes.get("/movie/now_playing?language=pt-BR'")
     const filmes = resultado.data.results
     return {
         props: {

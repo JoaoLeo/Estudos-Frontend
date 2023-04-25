@@ -6,29 +6,26 @@ import { Button, Card, Col, Row } from 'react-bootstrap'
 import Link from 'next/link'
 
 const index = (props) => {
-
+    const series = props.series
     return (
         <>
             <Pagina titulo="Popular">
 
                 <Row md={4}>
-                    {props.filmes.map(filme => (
+                    {series.map(serie => (
                         <Col>
                             <Card>
-                                <Card.Img variant="top" src={"https://image.tmdb.org/t/p/w500" + filme.backdrop_path} />
+                                <Card.Img variant="top" src={"https://image.tmdb.org/t/p/w500" + serie.backdrop_path} />
                                 <Card.Body>
-                                    <Card.Title>{filme.title}</Card.Title>
+                                    <Card.Title>{serie.name}</Card.Title>
                                     <p>
-                                        Lançamento: {filme.release_date}
+                                        Nota: {serie.vote_average}
                                     </p>
                                     <p>
-                                        Nota: {filme.vote_average}
+                                        {serie.overview}
                                     </p>
                                     <p>
-                                        {filme.overview}
-                                    </p>
-                                    <p>
-                                        <Link className='btn btn-warning' href={"/filmes/" + filme.id}> Detalhes</Link>
+                                        <Link className='btn btn-warning' href={"/series/" + serie.id}> Detalhes</Link>
                                     </p>
                                 
                                 </Card.Body>
@@ -46,11 +43,11 @@ const index = (props) => {
 export default index
 
 export async function getServerSideProps(context) {
-    const resultado = await apiFilmes.get("/movie/popular?language=pt-BR'")
-    const filmes = resultado.data.results
+    const resultado = await apiFilmes.get("/tv/popular?language=pt-BR'")
+    const series = resultado.data.results
     return {
         props: {
-            filmes
+            series
         },
     }
 }

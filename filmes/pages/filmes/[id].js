@@ -59,8 +59,8 @@ const Detalhes = (props) => {
                 titulo="Atores" 
                 lista={atores} 
                 propriedade="profile_path" 
-                size={2} l
-                ink="/atores/" />
+                size={2}
+                link="/atores/" />
             </Pagina>
         </>
     )

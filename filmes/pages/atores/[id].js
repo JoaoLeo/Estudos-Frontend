@@ -1,3 +1,4 @@
+import Imagens from '@/components/Imagens'
 import Pagina from '@/components/Pagina'
 import apiFilmes from '@/services/apiFilmes'
 import Link from 'next/link'
@@ -22,35 +23,25 @@ const DetalhesAtores = (props) => {
             <p> <strong> Biografia: </strong> {ator.biography != "" ? ator.biography : "Não informado na api"}</p>
         </Col>
     </Row>
-    <Row>
-        <h1> Imagens: </h1>
-            {imagens.map(i => (
-                <Col md={2}>
-                    <Card.Img variant="top" src={"https://image.tmdb.org/t/p/w500" + i.file_path}  />
-                </Col>
-            ))}
-    </Row>
-    <Row>
-                        <h1> Filmes em que atuou: </h1>
-                        {filmes.map(f => (
-                            <Col md={2}>
-                            <Link href={"/filmes/" + f.id}>
-                            <Card.Img variant="top" src={"https://image.tmdb.org/t/p/w500" + f.poster_path} title={f.name} />
-                            </Link>
-                            </Col>
-                        ))}
-                   
-                </Row>
+    
+    <Imagens 
+    titulo="Imagens" 
+    lista={imagens} 
+    propriedade="file_path" 
+    size={1}/>
 
-                <Row>
-                        <h1> Series de TV em que atuou: </h1>
-                        {series.map(s => (
-                            <Col md={2}>
-                            <Card.Img variant="top" src={"https://image.tmdb.org/t/p/w500" + s.poster_path} />
-                            </Col>
-                        ))}
-                   
-                </Row>
+    <Imagens 
+    titulo="Filmes" 
+    lista={filmes} 
+    propriedade="poster_path" 
+    size={2}/>
+
+    <Imagens 
+     titulo="Séries" 
+     lista={series}
+     propriedade="poster_path" 
+     size={2}/>
+            
     </Pagina>
     </>
   )

@@ -1,3 +1,4 @@
+import Imagens from '@/components/Imagens';
 import Pagina from '@/components/Pagina';
 import apiFilmes from '@/services/apiFilmes';
 import Link from 'next/link';
@@ -6,7 +7,7 @@ import { Card, Col, Row } from 'react-bootstrap';
 
 const Detalhes = (props) => {
     const filme = props.filme
-    const atores = props.atores
+    const atores = props.atores.cast
     return (
         <>
             <Pagina titulo={filme.title}>
@@ -54,20 +55,12 @@ const Detalhes = (props) => {
                     </Col>
                   
                 </Row>
-                <h1> Atores </h1>
-                    <Row>
-                        
-                            {atores.cast.map(a => (
-                                <Col md={2}>
-                                <Link href={"/atores/" + a.id}>
-                                <Card.Img variant="top" src={"https://image.tmdb.org/t/p/w500" + a.profile_path} title={a.name} />
-                                </Link>
-                                </Col>
-                            ))}
-                       
-                    </Row>
-
-
+                <Imagens 
+                titulo="Atores" 
+                lista={atores} 
+                propriedade="profile_path" 
+                size={2} l
+                ink="/atores/" />
             </Pagina>
         </>
     )

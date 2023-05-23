@@ -3,7 +3,8 @@ import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { Table } from 'react-bootstrap'
 import { AiFillPlusCircle } from 'react-icons/ai'
-import { BsTrashFill } from 'react-icons/bs'
+import { BsTrashFill, BsFillPencilFill } from 'react-icons/bs'
+
 const Cursos = () => {
     const [cursos, setCursos] = useState([])
 
@@ -15,10 +16,12 @@ const Cursos = () => {
       return JSON.parse(window.localStorage.getItem('cursos')) || []
     }
     function excluir(i){ 
-      const itens = getAll()
-      itens.splice(i, 1) 
-      window.localStorage.setItem('cursos', JSON.stringify(itens))
-      setCursos(itens)
+      if(confirm("Deseja realmente excluir o registro?")) { 
+        const itens = getAll()
+        itens.splice(i, 1) 
+        window.localStorage.setItem('cursos', JSON.stringify(itens))
+        setCursos(itens)
+    }
     }
     return (
         <Pagina titulo="Cursos">
@@ -34,7 +37,7 @@ const Cursos = () => {
                         <th>Nome</th>
                         <th>Duração</th>
                         <th>Modalidade</th>
-                        <th> # </th>
+                        <th> Ações </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -49,7 +52,12 @@ const Cursos = () => {
                         <td>
                             {c.modalidade}
                         </td>
-                        <td> <BsTrashFill onClick={() => excluir(index)} className="text-danger"/> </td>
+                        <td> 
+                        <BsTrashFill onClick={() => excluir(index)} className="text-danger me-2"/> 
+                        <Link href={'/cursos/' + index}>
+                            <BsFillPencilFill /> 
+                        </Link>
+                        </td>
                     </tr>
                 ))}
                 </tbody>

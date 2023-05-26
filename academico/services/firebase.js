@@ -1,10 +1,12 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { initializeApp, getApp } from "firebase/app";
+import { getDatabase } from "firebase/database";
 
-// Your web app's Firebase configuration
-const firebaseConfig = {
+let app;
+try {
+  app = getApp()
+} catch(err){
+  
+  const firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY,
   authDomain: process.env.FIREBASE_AUTH_DOMAIN,
   databaseURL: process.env.FIREBASE_DB_URL,
@@ -14,5 +16,10 @@ const firebaseConfig = {
   appId: process.env.APP_ID,
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+
+ app = initializeApp(firebaseConfig);
+}
+
+const db = getDatabase(app);
+
+export { db }

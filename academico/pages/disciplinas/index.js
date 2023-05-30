@@ -1,4 +1,5 @@
 import Pagina from '@/components/Pagina'
+import axios from 'axios'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { Table } from 'react-bootstrap'
@@ -9,13 +10,24 @@ const Disciplinas = () => {
     const [disciplinas, setDisciplinas] = useState([])
 
     useEffect(()=>{
-       
+        getAll()
     },[])
 
+    function getAll(){
+        axios.get("/api/disciplinas").then(res => {
+            setDisciplinas(res.data)
+           })
+    }
+    function excluir(id){ 
+        if(confirm("Deseja realmente excluir o registro?")) { 
+          axios.delete("api/disciplinas/" + id)
+          getAll()
+        }
+      }
     return (
-        <Pagina titulo="Cursos">
+        <Pagina titulo="Disciplinas">
 
-            <Link href="/cursos/form" className='mb-2 btn btn-primary'> 
+            <Link href="/disciplinas/form" className='mb-2 btn btn-primary'> 
             <AiFillPlusCircle className='m-1' />
             Novo
             </Link>
@@ -25,23 +37,21 @@ const Disciplinas = () => {
                     <tr>                       
                         <th>Nome</th>
                         <th>Curso</th>
+                        <th> </th>
                     </tr>
                 </thead>
                 <tbody>
-                {disciplinas.map((c,index) =>(
-		            <tr key={index}>
+                {disciplinas.map(d =>(
+		            <tr key={d.id}>
                         <td>
-                            {c.nome}
+                            {d.nome}
                         </td>
                         <td>
-                            {c.duracao}
-                        </td>
-                        <td>
-                            {c.modalidade}
+                            {d.curso}
                         </td>
                         <td> 
-                        <BsTrashFill onClick={() => excluir(index)} className="text-danger me-2"/> 
-                        <Link href={'/disciplinas/' + index}>
+                        <BsTrashFill onClick={() => excluir(d.id)} className="text-danger me-2"/> 
+                        <Link href={'/disciplinas/' + d.id}>
                             <BsFillPencilFill /> 
                         </Link>
                         </td>

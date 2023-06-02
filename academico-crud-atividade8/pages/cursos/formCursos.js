@@ -19,7 +19,7 @@ const formCursos = () => {
 
   return (
     <> 
-    <Cabecalho titulo="Criar curso"/>
+    <Cabecalho/>
     <Container> 
       <Form>
         <Form.Group className="mb-3" controlId="nome">

@@ -25,7 +25,7 @@ const index = () => {
     }
     return (
         <>
-            <Cabecalho titulo="Salas"/>
+            <Cabecalho/>
             <Container> 
             <Link href="/salas/formSalas" className='mb-2 btn btn-primary'> 
             <AiFillPlusCircle className='m-1' />

@@ -39,7 +39,7 @@ const id = () => {
 
         <Form.Group className="mb-3" controlId="duracao">
           <Form.Label>Duração</Form.Label>
-          <Form.Control type="text" placeholder="Digite a duração" {...register('duracao')} />
+          <Form.Control type="number" placeholder="Digite a duração" {...register('duracao')} />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="modalidade">

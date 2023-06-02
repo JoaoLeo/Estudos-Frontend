@@ -24,17 +24,17 @@ const formCursos = () => {
       <Form>
         <Form.Group className="mb-3" controlId="nome">
           <Form.Label>Nome</Form.Label>
-          <Form.Control type="text" placeholder="Digite o nome do curso" {...register('nome')} />
+          <Form.Control type="text" placeholder="Digite o nome do curso" {...register('nome', { required: true })} />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="duracao">
           <Form.Label>Duração</Form.Label>
-          <Form.Control type="number" placeholder="Digite a duração" {...register('duracao')} />
+          <Form.Control type="number" placeholder="Digite a duração" {...register('duracao', { required: true })} />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="modalidade">
           <Form.Label>Modalidade</Form.Label>
-          <Form.Control type="text" placeholder="Digite a modalidade" {...register('modalidade')}  />
+          <Form.Control type="text" placeholder="Digite a modalidade" {...register('modalidade, { required: true }')}  />
         </Form.Group>
 
         <div className='text-center'>

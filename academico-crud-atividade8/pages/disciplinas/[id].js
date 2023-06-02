@@ -12,19 +12,19 @@ const id = () => {
 
   useEffect(()=>{
     if(query.id) { 
-    const cursos = JSON.parse(window.localStorage.getItem('cursos'))
-    const curso = cursos[query.id]
-    for(let campo in curso) {
-        setValue(campo, curso[campo])
+    const disciplinas = JSON.parse(window.localStorage.getItem('disciplinas'))
+    const disciplina = disciplinas[query.id]
+    for(let campo in disciplina) {
+        setValue(campo, disciplina[campo])
     }
 }
   },[query.id])
 
   function salvar(dados) {
-    const cursos = JSON.parse(window.localStorage.getItem('cursos')) || []
-    cursos.splice(query.id, 1, dados)
-    window.localStorage.setItem('cursos', JSON.stringify(cursos))
-    push("/cursos")
+    const disciplinas = JSON.parse(window.localStorage.getItem('disciplinas')) || []
+    disciplinas.splice(query.id, 1, dados)
+    window.localStorage.setItem('disciplinas', JSON.stringify(disciplinas))
+    push("/disciplinas")
   }
 
   return (
@@ -37,22 +37,18 @@ const id = () => {
           <Form.Control type="text" placeholder="Digite o nome do curso" {...register('nome')} />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="duracao">
-          <Form.Label>Duração</Form.Label>
-          <Form.Control type="text" placeholder="Digite a duração" {...register('duracao')} />
+        <Form.Group className="mb-3" controlId="curso">
+          <Form.Label>Curso</Form.Label>
+          <Form.Control type="text" placeholder="Digite o curso" {...register('curso')} />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="modalidade">
-          <Form.Label>Modalidade</Form.Label>
-          <Form.Control type="text" placeholder="Digite a modalidade" {...register('modalidade')}  />
-        </Form.Group>
 
         <div className='text-center'>
         <Button variant="success" className='me-2'>
           <BsSendCheck className='me-2' onClick={handleSubmit(salvar)}/>
           Salvar
         </Button>
-        <Link href={'/cursos'}>
+        <Link href={'/disciplinas'}>
         <Button variant="danger">
           <BsArrowBarLeft className='me-2'/> 
           Voltar

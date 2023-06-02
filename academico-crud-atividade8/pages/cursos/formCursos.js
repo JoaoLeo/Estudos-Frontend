@@ -34,7 +34,7 @@ const formCursos = () => {
 
         <Form.Group className="mb-3" controlId="modalidade">
           <Form.Label>Modalidade</Form.Label>
-          <Form.Control type="text" placeholder="Digite a modalidade" {...register('modalidade, { required: true }')}  />
+          <Form.Control type="text" placeholder="Digite a modalidade" {...register('modalidade', { required: true })}  />
         </Form.Group>
 
         <div className='text-center'>

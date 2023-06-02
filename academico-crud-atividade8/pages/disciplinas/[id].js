@@ -34,12 +34,12 @@ const id = () => {
       <Form>
         <Form.Group className="mb-3" controlId="nome">
           <Form.Label>Nome</Form.Label>
-          <Form.Control type="text" placeholder="Digite o nome do curso" {...register('nome')} />
+          <Form.Control type="text" placeholder="Digite o nome do curso" {...register('nome', { required: true })} />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="curso">
           <Form.Label>Curso</Form.Label>
-          <Form.Control type="text" placeholder="Digite o curso" {...register('curso')} />
+          <Form.Control type="text" placeholder="Digite o curso" {...register('curso', { required: true })} />
         </Form.Group>
 
 

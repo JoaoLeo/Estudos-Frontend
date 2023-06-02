@@ -1,0 +1,98 @@
+import Cabecalho from '@/components/Cabecalho'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import React from 'react'
+import { Button, Container, Form } from 'react-bootstrap'
+import { useForm } from 'react-hook-form'
+import { BsArrowBarLeft, BsSendCheck } from 'react-icons/bs'
+
+const formProfessores = () => {
+  const { push } = useRouter()
+  const { register, handleSubmit } = useForm();
+
+  function salvar(dados) {
+    const professores = JSON.parse(window.localStorage.getItem('professores')) || []
+    professores.unshift(dados)
+    window.localStorage.setItem('professores', JSON.stringify(professores))
+    push("/professores")
+  }
+
+  return (
+    <> 
+    <Cabecalho/>
+    <Container> 
+      <Form>
+        <Form.Group className="mb-3" controlId="nome">
+          <Form.Label>Nome</Form.Label>
+          <Form.Control type="text" placeholder="Digite o nome" {...register('nome', { required: true })}/>
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="cpf">
+          <Form.Label>CPF</Form.Label>
+          <Form.Control type="text" placeholder="Digite o cpf" {...register('cpf', { required: true })} />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="matricula">
+          <Form.Label>Matrícula</Form.Label>
+          <Form.Control type="text" placeholder="Digite a matricula" {...register('matricula', { required: true })} />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="salario">
+          <Form.Label>Salário</Form.Label>
+          <Form.Control type="number" placeholder="Digite o salario" {...register('salario')} />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="email">
+          <Form.Label>Email</Form.Label>
+          <Form.Control type="email" placeholder="Digite o email" {...register('email')} />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="telefone">
+          <Form.Label>Telefone</Form.Label>
+          <Form.Control type="tel" placeholder="Digite o telefone" {...register('telefone')} />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="cep">
+          <Form.Label>CEP</Form.Label>
+          <Form.Control type="number" placeholder="Digite o cep" {...register('cep')} />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="logradouro">
+          <Form.Label>Logradouro</Form.Label>
+          <Form.Control type="text" placeholder="Digite o logradouro" {...register('logradouro')} />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="complemento">
+          <Form.Label>Complemento</Form.Label>
+          <Form.Control type="text" placeholder="Digite o complemento" {...register('complemento')} />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="numero">
+          <Form.Label>Numero</Form.Label>
+          <Form.Control type="text" placeholder="Digite o numero" {...register('numero')} />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="bairro">
+          <Form.Label>Bairro</Form.Label>
+          <Form.Control type="text" placeholder="Digite a matricula" {...register('bairro')} />
+        </Form.Group>
+
+        <div className='text-center'>
+        <Button variant="success" className='me-2' onClick={handleSubmit(salvar)}>
+          <BsSendCheck className='me-2'/>
+          Salvar
+        </Button>
+        <Link href={'/professores'}>
+        <Button variant="danger">
+          <BsArrowBarLeft className='me-2'/> 
+          Voltar
+        </Button>
+        </Link>
+        </div>
+      </Form>
+      </Container>
+      </>
+  )
+}
+
+export default formProfessores

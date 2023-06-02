@@ -1,28 +1,38 @@
 import Cabecalho from '@/components/Cabecalho'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Container, Form } from 'react-bootstrap'
 import { useForm } from 'react-hook-form'
 import { BsArrowBarLeft, BsSendCheck } from 'react-icons/bs'
 
-const formSemestres = () => {
-  const { push } = useRouter()
-  const { register, handleSubmit } = useForm();
+const id = () => {
+  const { push, query } = useRouter()
+  const { register, handleSubmit, setValue } = useForm();
+
+  useEffect(()=>{
+    if(query.id) { 
+    const semestres = JSON.parse(window.localStorage.getItem('semestres'))
+    const curso = semestres[query.id]
+    for(let campo in curso) {
+        setValue(campo, curso[campo])
+    }
+}
+  },[query.id])
 
   function salvar(dados) {
     const semestres = JSON.parse(window.localStorage.getItem('semestres')) || []
-    semestres.unshift(dados)
+    semestres.splice(query.id, 1, dados)
     window.localStorage.setItem('semestres', JSON.stringify(semestres))
     push("/semestres")
   }
 
   return (
-    <> 
-    <Cabecalho />
+    <>
+    <Cabecalho/>
     <Container> 
       <Form>
-        <Form.Group className="mb-3" controlId="nome">
+      <Form.Group className="mb-3" controlId="nome">
           <Form.Label>Nome</Form.Label>
           <Form.Control type="text" placeholder="Digite o nome do semestre" {...register('nome', { required: true })} />
         </Form.Group>
@@ -38,8 +48,8 @@ const formSemestres = () => {
         </Form.Group>
 
         <div className='text-center'>
-        <Button variant="success" className='me-2' onClick={handleSubmit(salvar)}>
-          <BsSendCheck className='me-2'/>
+        <Button variant="success" className='me-2'>
+          <BsSendCheck className='me-2' onClick={handleSubmit(salvar)}/>
           Salvar
         </Button>
         <Link href={'/semestres'}>
@@ -51,8 +61,8 @@ const formSemestres = () => {
         </div>
       </Form>
       </Container>
-      </>
+    </>
   )
 }
 
-export default formSemestres
+export default id

@@ -1,4 +1,5 @@
 import Pagina from '@/components/Pagina'
+import axios from 'axios'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
@@ -12,45 +13,40 @@ const id = () => {
 
   useEffect(()=>{
     if(query.id) { 
-    const cursos = JSON.parse(window.localStorage.getItem('cursos'))
-    const curso = cursos[query.id]
-    for(let campo in curso) {
-        setValue(campo, curso[campo])
+      axios.get(`/api/disciplinas/${query.id}`).then(res => {
+        const disciplina = res.data
+        for(let atributo in disciplina){
+          setValue(atributo, disciplina[atributo])
+        }
+       })
     }
-}
   },[query.id])
 
   function salvar(dados) {
-    const cursos = JSON.parse(window.localStorage.getItem('cursos')) || []
-    cursos.splice(query.id, 1, dados)
-    window.localStorage.setItem('cursos', JSON.stringify(cursos))
-    push("/cursos")
+    axios.put(`/api/disciplinas/${query.id}`, dados)
+    push("/disciplinas")
+  
   }
 
   return (
-    <Pagina titulo="Curso">
+    <Pagina titulo="Disciplina">
       <Form>
         <Form.Group className="mb-3" controlId="nome">
           <Form.Label>Nome</Form.Label>
-          <Form.Control type="text" placeholder="Digite o nome do curso" {...register('nome')} />
+          <Form.Control type="text" placeholder="Digite o nome da disciplina" {...register('nome')} />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="duracao">
-          <Form.Label>Duração</Form.Label>
-          <Form.Control type="text" placeholder="Digite a duração" {...register('duracao')} />
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="modalidade">
-          <Form.Label>Modalidade</Form.Label>
-          <Form.Control type="text" placeholder="Digite a modalidade" {...register('modalidade')}  />
+        <Form.Group className="mb-3" controlId="Curso">
+          <Form.Label>Curso</Form.Label>
+          <Form.Control type="text" placeholder="Digite o curso" {...register('curso')} />
         </Form.Group>
 
         <div className='text-center'>
         <Button variant="success" className='me-2'>
-          <BsSendCheck className='me-2' onClick={salvar}/>
+          <BsSendCheck className='me-2' onClick={handleSubmit(salvar)}/>
           Salvar
         </Button>
-        <Link href={'/cursos'}>
+        <Link href={'/disciplinas'}>
         <Button variant="danger">
           <BsArrowBarLeft className='me-2'/> 
           Voltar

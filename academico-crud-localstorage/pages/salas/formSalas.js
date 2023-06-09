@@ -1,4 +1,5 @@
 import Cabecalho from '@/components/Cabecalho'
+import salaValidator from '@/validators/salaValidator'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
@@ -8,7 +9,7 @@ import { BsArrowBarLeft, BsSendCheck } from 'react-icons/bs'
 
 const formSalas = () => {
   const { push } = useRouter()
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, formState: { errors } } = useForm();
 
   function salvar(dados) {
     const salas = JSON.parse(window.localStorage.getItem('salas')) || []
@@ -24,17 +25,20 @@ const formSalas = () => {
       <Form>
         <Form.Group className="mb-3" controlId="nome">
           <Form.Label>Nome</Form.Label>
-          <Form.Control type="text" placeholder="Digite o nome da sala" {...register('nome', { required: true })} />
+          <Form.Control type="text" isInvalid={errors.nome} placeholder="Digite o nome da sala" {...register('nome', salaValidator.nome )} />
+          { errors.nome && <p className='mt-1 text-danger'> {errors.nome.message} </p> } 
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="capacidade">
           <Form.Label>Capacidade</Form.Label>
-          <Form.Control type="number" placeholder="Digite a capacidade" {...register('capacidade', { required: true })} />
+          <Form.Control type="number" isInvalid={errors.capacidade} placeholder="Digite a capacidade" {...register('capacidade', salaValidator.capacidade )} />
+          { errors.capacidade && <p className='mt-1 text-danger'> {errors.capacidade.message} </p> } 
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="tipo">
           <Form.Label>Tipo</Form.Label>
-          <Form.Control type="text" placeholder="Digite o tipo" {...register('tipo', { required: true })}  />
+          <Form.Control type="text" isInvalid={errors.tipo} placeholder="Digite o tipo" {...register('tipo', salaValidator.tipo )}  />
+          { errors.tipo && <p className='mt-1 text-danger'> {errors.tipo.message} </p> } 
         </Form.Group>
 
         <div className='text-center'>

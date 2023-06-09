@@ -1,6 +1,6 @@
 const cursoValidator = {
     nome: {
-        required : "Campo obrigatório" ,
+        required : "Campo de nome é obrigatório" ,
         minLength: {
           value: 1,
           message: "O mínimo é 1"

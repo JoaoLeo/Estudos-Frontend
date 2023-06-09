@@ -6,15 +6,15 @@ const cursoValidator = {
           message: "O mínimo é 1"
          },
          maxLength: {
-          value: 4,
-          message: "O máximo é 4"
+          value: 200,
+          message: "O máximo é 200"
          }
       },
     duracao: {
         required: "Campo obrigatório" ,
         minLength: {
-        value: 3,
-        message: "O mínimo é 3"
+        value: 1,
+        message: "O mínimo é 1"
         },
         maxLength: {
         value: 10,

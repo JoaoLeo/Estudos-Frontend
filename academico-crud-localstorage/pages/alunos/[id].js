@@ -8,7 +8,7 @@ import { BsArrowBarLeft, BsSendCheck } from 'react-icons/bs'
 
 const id = () => {
   const { push, query } = useRouter()
-  const { register, handleSubmit, setValue } = useForm();
+  const { register, handleSubmit, setValue, formState : { errors } } = useForm();
 
   useEffect(()=>{
     if(query.id) { 
@@ -34,52 +34,62 @@ const id = () => {
       <Form>
       <Form.Group className="mb-3" controlId="nome">
           <Form.Label>Nome</Form.Label>
-          <Form.Control type="text" placeholder="Digite o nome" {...register('nome', { required: true })} />
+          <Form.Control type="text" isInvalid={errors.nome} placeholder="Digite o nome" {...register('nome', alunoValidator.nome)}/>
+          { errors.nome && <p className='mt-1 text-danger'> {errors.nome.message} </p> } 
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="cpf">
           <Form.Label>CPF</Form.Label>
-          <Form.Control type="text" placeholder="Digite o cpf" {...register('cpf', { required: true })} />
+          <Form.Control type="text" isInvalid={errors.cpf} placeholder="Digite o cpf" {...register('cpf', alunoValidator.cpf )} />
+          { errors.cpf && <p className='mt-1 text-danger'> {errors.cpf.message} </p> } 
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="matricula">
           <Form.Label>Matrícula</Form.Label>
-          <Form.Control type="text" placeholder="Digite a matricula" {...register('matricula', { required: true })} />
+          <Form.Control type="text" isInvalid={errors.matricula} placeholder="Digite a matricula" {...register('matricula', alunoValidator.matricula)} />
+          { errors.matricula && <p className='mt-1 text-danger'> {errors.matricula.message} </p> } 
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="email">
           <Form.Label>Email</Form.Label>
-          <Form.Control type="email" placeholder="Digite o email" {...register('email')} />
+          <Form.Control type="email" isInvalid={errors.email} placeholder="Digite o email" {...register('email', alunoValidator.email)} />
+          { errors.email && <p className='mt-1 text-danger'> {errors.email.message} </p> } 
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="telefone">
           <Form.Label>Telefone</Form.Label>
-          <Form.Control type="tel" placeholder="Digite o telefone" {...register('telefone')} />
+          <Form.Control type="tel" isInvalid={errors.telefone} placeholder="Digite o telefone" {...register('telefone', alunoValidator.telefone)} />
+          { errors.telefone && <p className='mt-1 text-danger'> {errors.telefone.message} </p> } 
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="cep">
           <Form.Label>CEP</Form.Label>
-          <Form.Control type="number" placeholder="Digite o cep" {...register('cep')} />
+          <Form.Control type="number" isInvalid={errors.cep} placeholder="Digite o cep" {...register('cep', alunoValidator.cep)} />
+          { errors.cep && <p className='mt-1 text-danger'> {errors.cep.message} </p> } 
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="logradouro">
           <Form.Label>Logradouro</Form.Label>
-          <Form.Control type="text" placeholder="Digite o logradouro" {...register('logradouro')} />
+          <Form.Control type="text" isInvalid={errors.logradouro} placeholder="Digite o logradouro" {...register('logradouro', alunoValidator.logradouro)} />
+          { errors.logradouro && <p className='mt-1 text-danger'> {errors.logradouro.message} </p> } 
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="complemento">
           <Form.Label>Complemento</Form.Label>
-          <Form.Control type="text" placeholder="Digite o complemento" {...register('complemento')} />
+          <Form.Control type="text" isInvalid={errors.complemento} placeholder="Digite o complemento" {...register('complemento', alunoValidator.complemento)} />
+          { errors.complemento && <p className='mt-1 text-danger'> {errors.complemento.message} </p> } 
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="numero">
           <Form.Label>Numero</Form.Label>
-          <Form.Control type="text" placeholder="Digite o numero" {...register('numero')} />
+          <Form.Control type="text" isInvalid={errors.numero} placeholder="Digite o numero" {...register('numero', alunoValidator.numero)} />
+          { errors.numero && <p className='mt-1 text-danger'> {errors.numero.message} </p> } 
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="bairro">
           <Form.Label>Bairro</Form.Label>
-          <Form.Control type="text" placeholder="Digite a matricula" {...register('bairro')} />
+          <Form.Control type="text" isInvalid={errors.bairro} placeholder="Digite a matricula" {...register('bairro', alunoValidator.bairro)} />
+          { errors.bairro && <p className='mt-1 text-danger'> {errors.bairro.message} </p> } 
         </Form.Group>
 
 

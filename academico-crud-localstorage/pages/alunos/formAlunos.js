@@ -6,16 +6,20 @@ import React from 'react'
 import { Button, Container, Form } from 'react-bootstrap'
 import { useForm } from 'react-hook-form'
 import { BsArrowBarLeft, BsSendCheck } from 'react-icons/bs'
+import { mask } from 'remask'
 
 const formAlunos = () => {
   const { push } = useRouter()
-  const { register, handleSubmit, formState : { errors } } = useForm();
+  const { register, handleSubmit, formState : { errors }, setValue } = useForm();
 
   function salvar(dados) {
     const alunos = JSON.parse(window.localStorage.getItem('alunos')) || []
     alunos.unshift(dados)
     window.localStorage.setItem('alunos', JSON.stringify(alunos))
     push("/alunos")
+  }
+  function handleChange(event){
+    setValue(event.target.name, (mask(event.target.value, event.target.getAttribute("mask"))))
   }
 
   return (
@@ -31,7 +35,13 @@ const formAlunos = () => {
 
         <Form.Group className="mb-3" controlId="cpf">
           <Form.Label>CPF</Form.Label>
-          <Form.Control type="text" isInvalid={errors.cpf} placeholder="Digite o cpf" {...register('cpf', alunoValidator.cpf )} />
+          <Form.Control 
+            type="text" 
+            isInvalid={errors.cpf} 
+            placeholder="Digite o cpf" 
+            {...register('cpf', alunoValidator.cpf )} 
+            mask="999.999.999-99"
+            onChange={handleChange} />
           { errors.cpf && <p className='mt-1 text-danger'> {errors.cpf.message} </p> } 
         </Form.Group>
 

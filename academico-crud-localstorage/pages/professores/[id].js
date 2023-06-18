@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react'
 import { Button, Container, Form } from 'react-bootstrap'
 import { useForm } from 'react-hook-form'
 import { BsArrowBarLeft, BsSendCheck } from 'react-icons/bs'
+import { mask } from 'remask'
 
 const id = () => {
   const { push, query } = useRouter()
@@ -27,13 +28,16 @@ const id = () => {
     window.localStorage.setItem('professores', JSON.stringify(professores))
     push("/professores")
   }
+  function handleChange(event){
+    setValue(event.target.name, (mask(event.target.value, event.target.getAttribute("mask"))))
+  }
 
   return (
     <>
     <Cabecalho/>
     <Container> 
-      <Form>
-      <Form.Group className="mb-3" controlId="nome">
+    <Form>
+        <Form.Group className="mb-3" controlId="nome">
           <Form.Label>Nome</Form.Label>
           <Form.Control type="text" isInvalid={errors.nome} placeholder="Digite o nome" {...register('nome', professorValidator.nome)}/>
           { errors.nome && <p className='mt-1 text-danger'> {errors.nome.message} </p> } 
@@ -41,7 +45,12 @@ const id = () => {
 
         <Form.Group className="mb-3" controlId="cpf">
           <Form.Label>CPF</Form.Label>
-          <Form.Control type="text" isInvalid={errors.cpf} placeholder="Digite o cpf" {...register('cpf', professorValidator.cpf )} />
+          <Form.Control type="text" 
+          isInvalid={errors.cpf} 
+          placeholder="Digite o cpf"
+           {...register('cpf', professorValidator.cpf )}
+          mask="999.999.999-99"
+          onChange={handleChange} />
           { errors.cpf && <p className='mt-1 text-danger'> {errors.cpf.message} </p> } 
         </Form.Group>
 
@@ -65,13 +74,25 @@ const id = () => {
 
         <Form.Group className="mb-3" controlId="telefone">
           <Form.Label>Telefone</Form.Label>
-          <Form.Control type="tel" isInvalid={errors.telefone} placeholder="Digite o telefone" {...register('telefone', professorValidator.telefone)} />
+          <Form.Control type="tel"
+           isInvalid={errors.telefone}
+            placeholder="Digite o telefone" 
+            {...register('telefone', professorValidator.telefone)} 
+            mask="(99)99999-9999"
+            onChange={handleChange}
+            />
           { errors.telefone && <p className='mt-1 text-danger'> {errors.telefone.message} </p> } 
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="cep">
           <Form.Label>CEP</Form.Label>
-          <Form.Control type="number" isInvalid={errors.cep} placeholder="Digite o cep" {...register('cep', professorValidator.cep)} />
+          <Form.Control type="number" 
+          isInvalid={errors.cep} 
+          placeholder="Digite o cep" 
+          {...register('cep', professorValidator.cep)} 
+          mask="99999-999"
+          onChange={handleChange}
+           />
           { errors.cep && <p className='mt-1 text-danger'> {errors.cep.message} </p> } 
         </Form.Group>
 
@@ -99,10 +120,9 @@ const id = () => {
           { errors.bairro && <p className='mt-1 text-danger'> {errors.bairro.message} </p> } 
         </Form.Group>
 
-
         <div className='text-center'>
-        <Button variant="success" className='me-2'>
-          <BsSendCheck className='me-2' onClick={handleSubmit(salvar)}/>
+        <Button variant="success" className='me-2' onClick={handleSubmit(salvar)}>
+          <BsSendCheck className='me-2'/>
           Salvar
         </Button>
         <Link href={'/professores'}>

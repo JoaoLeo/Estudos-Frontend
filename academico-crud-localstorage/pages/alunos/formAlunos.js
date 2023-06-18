@@ -59,13 +59,25 @@ const formAlunos = () => {
 
         <Form.Group className="mb-3" controlId="telefone">
           <Form.Label>Telefone</Form.Label>
-          <Form.Control type="tel" isInvalid={errors.telefone} placeholder="Digite o telefone" {...register('telefone', alunoValidator.telefone)} />
+          <Form.Control type="tel" 
+          isInvalid={errors.telefone} 
+          placeholder="Digite o telefone" 
+          {...register('telefone', alunoValidator.telefone)}
+          mask="(99)99999-9999"
+          onChange={handleChange}
+           />
           { errors.telefone && <p className='mt-1 text-danger'> {errors.telefone.message} </p> } 
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="cep">
           <Form.Label>CEP</Form.Label>
-          <Form.Control type="number" isInvalid={errors.cep} placeholder="Digite o cep" {...register('cep', alunoValidator.cep)} />
+          <Form.Control type="number"
+           isInvalid={errors.cep} 
+           placeholder="Digite o cep" 
+           {...register('cep', alunoValidator.cep)}
+           mask="99999-999"
+           onChange={handleChange}
+            />
           { errors.cep && <p className='mt-1 text-danger'> {errors.cep.message} </p> } 
         </Form.Group>
 
